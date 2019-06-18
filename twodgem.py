@@ -13,8 +13,11 @@ class vector:
         return pf2-pf1
 
     def angle(v1,v2 = [1,0]):
-        return np.arccos((np.dot(v1,v2))
+        alpha =  np.arccos((np.dot(v1,v2))
                         /(vector.module(v1)*vector.module(v2)))
+        if(v1[1]<v2[1]):
+            alpha*=-1
+        return alpha
 
     def fromModule(moduleDist, angle):
             return np.array([moduleDist*np.cos(angle),

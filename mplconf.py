@@ -4,8 +4,6 @@ from axx.twodgem import *
 
 ax = plt.axes()
 
-
-
 def limitAxes(x1=0, x2=0, y1 = 0, y2 = 0,
               automatic = False, scaleRatio = 0):
 
@@ -26,7 +24,7 @@ def limitAxes(x1=0, x2=0, y1 = 0, y2 = 0,
 
 
 def realArrow(x1,y1,x2,y2, proportional = True,#Estoy hasta la polla de lo rota que esta la mate
-              head_width = 0.19, head_length = 0.7, fc = 'k', ec = 'k'):
+              head_width = 0.19, head_length = 0.7, fc = 'k', ec = 'k', color = 'k'):
 
     P = np.array([[x1,y1],[x2,y2]])
     angle = vector.angle(vector.fromPoints(P[0],P[1]))
@@ -35,7 +33,7 @@ def realArrow(x1,y1,x2,y2, proportional = True,#Estoy hasta la polla de lo rota 
     fVector = vector.fromPoints(P[0],realFpoint)
     ax.arrow(P[0][0], P[0][1],
             fVector[0], fVector[1],
-            head_width = head_width, head_length = head_length, fc=fc, ec=ec)
+            head_width = head_width, head_length = head_length, color = color)
 
 def dobleArrow(x1,y1,x2,y2, proportional = True,#proximamente MENUDO PUTO CANCER
                head_width = 0.19, head_length = 0.7, fc='k', ec='k'):
@@ -58,3 +56,23 @@ def dobleArrow(x1,y1,x2,y2, proportional = True,#proximamente MENUDO PUTO CANCER
     ax.arrow(realPoints[1][0],realPoints[1][1],
         realDist[0],realDist[1],
         head_width = head_width, head_length = head_length, fc=fc, ec=ec)
+
+
+def hideAxes():
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+
+def gridDensity():#Dont know how this works lol
+
+    major_ticks = np.arange(-15, 15, 2)
+    minor_ticks = np.arange(-15, 15, 20)
+
+    ax.set_xticks(major_ticks)
+    ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(major_ticks)
+    ax.set_yticks(minor_ticks, minor=True)
+
+    ax.grid(which='both')
+
+    ax.grid(which='minor', alpha=0.2)
+    ax.grid(which='major', alpha=0.5)
