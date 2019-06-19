@@ -91,3 +91,38 @@ def xANDy(lim,xaxpos,yaxpos, font = 22):
     plt.text(xaxpos[0],xaxpos[1],r'$x$')
     plt.text(yaxpos[0],yaxpos[1],r'$y$')
     plt.plot(x[0],y[0],x[1],y[1], color = 'k');
+
+
+def DDlinearTransform(ran=10,matrix = [[1,0],[0,1]],
+                      colorFunction = (1,1,1),
+                      head_width = 0.15, head_length = 0.7,
+                      vector = True):
+    r,g,b=1,0,0
+    canRed, canGreen, canBlue = True,False,False
+
+    T = np.zeros((ran*2,ran*2,2))
+
+    for i in range(-ran,ran+1):
+        for j in range(-ran,ran+1):
+
+            def rg():
+                r-=0.01 #Why dont work?
+                g+=0.01
+                if(r == 0): canRed = False; canGreen = True
+            def gb():
+                g-=0.01
+                b+=0.01
+                if(g == 0): canGreen = False; canBlue = True
+            def br():
+                b-=0.01
+                r+=0.01
+                if(b == 0): canBlue = False; canRed = True
+
+            if(canRed): rg()
+            if(canGreen): gb()
+            if(canBlue): br()
+
+            T[i,j] = [i,j]
+            T[i,j] = np.dot(matrix,T[i,j])
+            if(vector):realArrow(0,0,T[i,j,0],T[i,j,1],head_width=0.15, color = (r,g,b))
+            else:plt.scatter(T[:,:,0],T[:,:,1], color = (r,g,b))
