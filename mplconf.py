@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import matplotlib as mpl
 import numpy as np
 from axx.twodgem import *
 
@@ -23,7 +24,7 @@ def limitAxes(x1=0, x2=0, y1 = 0, y2 = 0,
             plt.gca().set_aspect(scaleRatio)
 
 
-def realArrow(x1,y1,x2,y2, proportional = True,#Estoy hasta la polla de lo rota que esta la mate
+def realArrow(x1,y1,x2,y2, proportional = True,
               head_width = 0.19, head_length = 0.7, fc = 'k', ec = 'k', color = 'k'):
 
     P = np.array([[x1,y1],[x2,y2]])
@@ -35,7 +36,10 @@ def realArrow(x1,y1,x2,y2, proportional = True,#Estoy hasta la polla de lo rota 
             fVector[0], fVector[1],
             head_width = head_width, head_length = head_length, color = color)
 
-def dobleArrow(x1,y1,x2,y2, proportional = True,#proximamente MENUDO PUTO CANCER
+#def dahsedLine(x1,y1,x2,y2, color = 'k'):
+#    ax.arrow(x1,y1,x2-x1,y2-y1,ls = 'dashed',arrowstyle = '-',head_width = 0, head_length = 0, color = color)
+
+def dobleArrow(x1,y1,x2,y2, proportional = True,
                head_width = 0.19, head_length = 0.7, fc='k', ec='k'):
 
     P = [[x1,y1],[x2,y2]]
@@ -76,3 +80,14 @@ def gridDensity():#Dont know how this works lol
 
     ax.grid(which='minor', alpha=0.2)
     ax.grid(which='major', alpha=0.5)
+
+def xANDy(lim,xaxpos,yaxpos, font = 22):
+    x = np.zeros((2,10))
+    y = np.zeros((2,10))
+    x[0] = np.linspace(-lim,lim,10)
+    y[0] = x[0]*0
+    y[1] = np.linspace(-lim,lim,10)
+    x[1] = y[0]*0
+    plt.text(xaxpos[0],xaxpos[1],r'$x$')
+    plt.text(yaxpos[0],yaxpos[1],r'$y$')
+    plt.plot(x[0],y[0],x[1],y[1], color = 'k');
