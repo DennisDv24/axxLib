@@ -96,33 +96,42 @@ def xANDy(lim,xaxpos,yaxpos, font = 22):
 def DDlinearTransform(ran=10,matrix = [[1,0],[0,1]],
                       colorFunction = (1,1,1),
                       head_width = 0.15, head_length = 0.7,
-                      vector = True):
-    r,g,b=1,0,0
+                      vector = True,
+                      factor = 0.1):
+    red=1
+    green=0
+    blue=0
     canRed, canGreen, canBlue = True,False,False
-
     T = np.zeros((ran*2,ran*2,2))
-
+    n=0
     for i in range(-ran,ran+1):
         for j in range(-ran,ran+1):
-
-            def rg():
-                r-=0.01 #Why dont work?
-                g+=0.01
-                if(r == 0): canRed = False; canGreen = True
-            def gb():
-                g-=0.01
-                b+=0.01
-                if(g == 0): canGreen = False; canBlue = True
-            def br():
-                b-=0.01
-                r+=0.01
-                if(b == 0): canBlue = False; canRed = True
-
-            if(canRed): rg()
-            if(canGreen): gb()
-            if(canBlue): br()
-
             T[i,j] = [i,j]
             T[i,j] = np.dot(matrix,T[i,j])
-            if(vector):realArrow(0,0,T[i,j,0],T[i,j,1],head_width=0.15, color = (r,g,b))
-            else:plt.scatter(T[:,:,0],T[:,:,1], color = (r,g,b))
+    for i in range(-ran-1,ran):
+        for j in range(-ran-1,ran):
+            #print(red)
+            #print(green)
+            #print(blue)
+            #print('-----------')FIXFIXFIXFIXFIX
+
+            # if(canRed):
+            #     red-=factor #Why dont work?
+            #     green+=factor
+            #     if(red <= 0): canRed = False; canGreen = True; red = 0;green = 1
+            # if(canGreen):
+            #     green-=factor
+            #     blue+=factor
+            #     if(green <= 0): canGreen = False; canBlue = True; green = 0;blue = 1
+            # if(canBlue):
+            #     blue-=factor
+            #     red+=factor
+            #     if(blue <= 0): canBlue = False; canRed = True; blue = 0;red = 1
+
+            #if((red>=0and green>=0and blue>=0) and (red<=1and green<=1and blue<=1)):
+            #if(vector):
+            realArrow(0,0,T[i,j,0],T[i,j,1],head_width=0.15, color = (red,green,blue))
+            # else:
+            #     plt.scatter(T[:,:,0],T[:,:,1], color = (red,green,blue))
+            #     plt.text(T[i,j,0],T[i,j,1],n)
+            # n+=1
